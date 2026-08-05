@@ -1,0 +1,6 @@
+# Planilhas Excel
+database/excel/**/*.xlsx
+
+# Arquivos temporários do Excel
+~$*.xlsx
+~$*.xls

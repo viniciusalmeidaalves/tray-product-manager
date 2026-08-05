@@ -1,12 +1,12 @@
 # Tray Product Manager
 
 ![MySQL](https://img.shields.io/badge/MySQL-Database-blue)
-![Microsoft Excel](https://img.shields.io/badge/Microsoft-Excel-green)
+![Excel](https://img.shields.io/badge/Microsoft-Excel-green)
 ![SQL](https://img.shields.io/badge/SQL-Views-orange)
-![License](https://img.shields.io/badge/License-MIT-blue)
-![Version](https://img.shields.io/badge/Version-1.0-success)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Version](https://img.shields.io/badge/version-1.0-success)
 
-Sistema para gerenciamento e atualização em massa de produtos exportados da plataforma **Tray Commerce**, utilizando **MySQL**, **Views SQL** e **Microsoft Excel**.
+Uma solução para gerenciamento e atualização em massa de produtos da plataforma Tray Commerce utilizando MySQL, SQL Views e Microsoft Excel.
 
 ---
 

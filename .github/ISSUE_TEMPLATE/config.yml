@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Repository support
+    url: https://github.com/viniciusalmeidaalves/software-project-template/issues
+    about: Use this link for questions or issues with the repository

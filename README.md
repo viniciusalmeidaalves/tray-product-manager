@@ -1,4 +1,4 @@
-# Tray Product Manager
+﻿# Tray Product Manager
 
 ![MySQL](https://img.shields.io/badge/MySQL-Database-blue)
 ![Excel](https://img.shields.io/badge/Microsoft-Excel-green)
@@ -10,244 +10,162 @@ Uma solução para gerenciamento e atualização em massa de produtos da platafo
 
 ---
 
-## Objetivo
+## Visão Geral
 
-O **Tray Product Manager** foi desenvolvido para facilitar a manutenção de grandes catálogos de produtos exportados da plataforma Tray, eliminando processos repetitivos e reduzindo erros operacionais.
+O **Tray Product Manager** ajuda a atualizar catálogos de produtos da Tray Commerce em lote, usando MySQL e Microsoft Excel como interface de edição.
 
-A solução organiza os dados em um banco **MySQL** e disponibiliza **Views SQL** específicas para atualização em massa através do **Microsoft Excel**, tornando o processo mais rápido, seguro e produtivo.
-
-### Principais funcionalidades
-
-- 💰 Atualização de Preços
-- 📦 Atualização de Estoque
-- 📏 Atualização de Medidas
-- 🔍 Atualização de SEO
-- 📄 Atualização Fiscal
+A solução organiza dados exportados da Tray em um banco MySQL e expõe views SQL que podem ser carregadas no Excel via Power Query ou ODBC.
 
 ---
 
-# Tecnologias
+## Funcionalidades Principais
+
+- Atualização em massa de preços
+- Atualização em massa de estoque
+- Atualização em massa de medidas
+- Atualização em massa de SEO
+- Atualização em massa de dados fiscais
+
+---
+
+## Tecnologias
 
 - MySQL / MariaDB
-- SQL (Views)
+- SQL
 - Microsoft Excel
 - Power Query
 - CSV
+- ODBC
 - Git
 - GitHub
 
 ---
 
-# Arquitetura
-
-```text
-              Plataforma Tray
-                     │
-                     ▼
-             Exportação CSV
-                     │
-                     ▼
-             Banco MySQL
-                     │
-      ┌──────────────┼──────────────┐
-      ▼              ▼              ▼
- Produtos      Categorias      Variações
-                     │
-                     ▼
-              Views SQL
-      ┌──────────────┼──────────────┐
-      ▼              ▼              ▼
- Preços        Estoque         SEO
-                     │
-                     ▼
-              Microsoft Excel
-```
-
----
-
-# Estrutura do Projeto
+## Estrutura do Projeto
 
 ```text
 tray-product-manager/
-
-│
+├── CHANGELOG.md
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   └── feature_request.md
+│   ├── config.yml
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── database/
-│   │
-│   ├── tray_tudo_natal/
+│   ├── docs/
+│   │   ├── arquitetura.md
+│   │   ├── fluxo.md
+│   │   ├── instalacao.md
+│   │   ├── roadmap.md
+│   │   ├── requisitos.md
+│   │   └── tecnologias.md
+│   ├── excel/
+│   ├── tray_rje_iluminacao/
 │   │   ├── categorias.sql
 │   │   └── views.sql
-│   │
-│   └── tray_rje_iluminacao/
+│   └── tray_tudo_natal/
 │       ├── categorias.sql
 │       └── views.sql
-│
-├── docs/
-│   ├── arquitetura.md
-│   └── fluxo.md
-│
-├── README.md
-└── LICENSE
+└── .github/workflows/
+    └── ci.yml
 ```
 
 ---
 
-# Funcionalidades
+## Documentação
 
-## Atualização de Preços
+A documentação completa está disponível na pasta `database/docs`:
 
-- Preço de Venda
-- Preço Promocional
-- Preço de Custo
-
----
-
-## Atualização de Medidas
-
-- Peso
-- Comprimento
-- Largura
-- Altura
+- 📘 [Instalação](database/docs/instalacao.md)
+- 📘 [Arquitetura](database/docs/arquitetura.md)
+- 📘 [Fluxo](database/docs/fluxo.md)
+- 📘 [Roadmap](database/docs/roadmap.md)
+- 📘 [Requisitos](database/docs/requisitos.md)
+- 📘 [Tecnologias](database/docs/tecnologias.md)
 
 ---
 
-## Atualização de Estoque
+## Uso
 
-- Estoque Atual
-- Estoque Mínimo
-- Disponibilidade
-
----
-
-## Atualização SEO
-
-- SEO Título
-- SEO Descrição
-- SEO Palavra-chave
-- URL do Produto
+1. Exporte os dados de produtos, variações e categorias da Tray em CSV.
+2. Importe os arquivos CSV para o MySQL.
+3. Execute `categorias.sql` para criar a tabela auxiliar de categorias.
+4. Execute `views.sql` para criar as views de atualização.
+5. Conecte o Excel via ODBC ou Power Query.
+6. Importe cada view como tabela no Excel.
+7. Edite apenas os campos necessários e exporte os dados de volta para a Tray.
 
 ---
 
-## Atualização Fiscal
+## Estrutura de Dados
 
-- EAN
-- NCM
-- IPI
-- Garantia
-
----
-
-# Fluxo de Utilização
-
-```text
-Tray
- │
- ▼
-Exportação CSV
- │
- ▼
-Importação MySQL
- │
- ▼
-categorias.sql
- │
- ▼
-views.sql
- │
- ▼
-Microsoft Excel
- │
- ▼
-Atualização dos Dados
- │
- ▼
-Importação na Tray
-```
+| Tabela | Descrição |
+|--------|-----------|
+| `produtos` | Cadastro principal dos produtos |
+| `variacao` | Cadastro das variações |
+| `categorias_produtos` | Relacionamento produto x categoria |
+| `categorias` | Tabela auxiliar para tradução de categorias |
 
 ---
 
-# Estrutura do Banco
+## Views Disponíveis
 
-|Tabela|Descrição|
-|------|---------|
-|produtos|Cadastro principal dos produtos|
-|variacao|Cadastro das variações|
-|categorias_produtos|Relacionamento Produto x Categoria|
-|categorias|Tabela auxiliar criada pelo projeto|
-
----
-
-# Views Disponíveis
-
-|View|Descrição|
-|----|---------|
-|vw_atualizacao_precos|Atualização de preços|
-|vw_atualizacao_medidas|Atualização de medidas|
-|vw_atualizacao_estoque|Atualização de estoque|
-|vw_atualizacao_seo|Atualização SEO|
-|vw_atualizacao_fiscal|Atualização fiscal|
+| View | Finalidade |
+|------|-----------|
+| `vw_atualizacao_precos` | Atualização de preços |
+| `vw_atualizacao_medidas` | Atualização de medidas |
+| `vw_atualizacao_estoque` | Atualização de estoque |
+| `vw_atualizacao_seo` | Atualização de SEO |
+| `vw_atualizacao_fiscal` | Atualização fiscal |
 
 ---
 
-# Bancos Homologados
+## Bancos Homologados
 
-- ✅ Tray Tudo Natal
-- ✅ Tray RJE Iluminação
-
-A arquitetura permite adicionar novas lojas Tray reutilizando a mesma estrutura de banco de dados e Views.
+- Tray Tudo Natal
+- Tray RJE Iluminação
 
 ---
 
-# Roadmap
+## Roadmap
 
 ### Versão 1.0
 
-- Importação de CSV
-- Banco MySQL
-- Views SQL
-- Integração com Excel
+- Estrutura básica do projeto
+- Scripts SQL de categorias e views
+- Documentação inicial
+- Suporte ao Excel via Power Query
 
-### Versão 2.0
+### Futuras melhorias
 
-- Stored Procedures
-- Functions
-- Triggers
-- Dashboards
-- Automação de Processos
-
-### Versão 3.0
-
+- Automação de importação/exportação
+- Dashboards e relatórios
 - Integração com API Tray
-- Interface Web
-- Controle de Usuários
-- Histórico de Alterações
-- Atualização Automática
+- Regras de validação de dados
+- Suporte a novas lojas Tray
 
 ---
 
-# Documentação
+## Contribuição
 
-A documentação completa está disponível na pasta **docs**.
-
-- 📘 arquitetura.md
-- 📘 fluxo.md
+Leia [CONTRIBUTING.md](CONTRIBUTING.md) para saber como contribuir.
 
 ---
 
-# Licença
+## Licença
 
-Distribuído sob a licença **MIT**.
+Este projeto está licenciado sob a licença [MIT](LICENSE).
 
 ---
 
-# Autor
+## Autor
 
 **Vinicius Almeida Alves**
 
-Engenheiro da Computação  
-MBA em Engenharia de Software
-
-GitHub:
-https://github.com/viniciusalmeidaalves
-
-LinkedIn:
-https://www.linkedin.com/in/viniciusalmeidaalves/
+- GitHub: https://github.com/viniciusalmeidaalves
+- LinkedIn: https://www.linkedin.com/in/viniciusalmeidaalves/

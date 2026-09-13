@@ -18,6 +18,22 @@ A solução organiza dados exportados da Tray em um banco MySQL e expõe views S
 
 ---
 
+## Imagens
+
+### Fluxograma
+
+![Fluxograma do processo](screenshot/fluxograma.png)
+
+### View de preços
+
+![View de preços](screenshot/vw_precos.png)
+
+### Atualização de produtos
+
+![Atualização de produtos](screenshot/Atualização-de-produtos.png)
+
+---
+
 ## Funcionalidades Principais
 
 - Atualização em massa de preços
